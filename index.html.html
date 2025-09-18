@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Informe de Estatus de ATM - Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+        h1 {
+            color: #1a2a47;
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 2.5em;
+        }
+        p.subtitle {
+            color: #666;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+        .summary-cards {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .card {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            width: 30%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .card-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #1a2a47;
+        }
+        .card-title {
+            color: #555;
+            font-size: 1em;
+            margin-top: 5px;
+        }
+        .toolbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .toolbar select, .toolbar input {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            flex: 1;
+            min-width: 150px;
+        }
+        .toolbar button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            background-color: #1a2a47;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .toolbar button:hover {
+            background-color: #0d1a2c;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #1a2a47;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1.1em;
+            padding: 15px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e6f7ff;
+        }
+        .connection-cell, .supplier-cell {
+            text-align: center;
+        }
+        .status-cell {
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .status-agendada {
+            background-color: #c8e6c9;
+            color: #2e7d32;
+        }
+        .status-vencida {
+            background-color: #ffcdd2;
+            color: #c62828;
+        }
+        .status-completada {
+            background-color: #bbdefb;
+            color: #1565c0;
+        }
+        .connection-select, .supplier-select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            width: 100%;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .pagination button {
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #1a2a47;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .pagination button:not(:disabled):hover {
+            background-color: #0d1a2c;
+        }
+        /* Nuevo estilo para la columna de Cuentas / Contratos */
+        .accounts-column {
+            width: 15%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Informe de Estatus de ATM</h1>
+        <p class="subtitle">Análisis detallado de la red de cajeros automáticos</p>
+        
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-number" id="total-atms">40</div>
+                <div class="card-title">Total de ATMs</div>
+            </div>
+            <div class="card">
+                <div class="card-number" id="agendadas-count">3</div>
+                <div class="card-title">Visitas Agendadas</div>
+            </div>
+            <div class="card">
+                <div class="card-number" id="completadas-count">37</div>
+                <div class="card-title">Visitas Completadas</div>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <button id="add-atm-btn">➕ Agregar ATM</button>
+            <button id="delete-atm-btn">🗑️ Eliminar Seleccionado</button>
+            <select id="status-filter">
+                <option value="todos">Mostrar todos</option>
+                <option value="agendada">Agendada</option>
+                <option value="vencida">Vencida</option>
+                <option value="completada">Completada</option>
+            </select>
+            <select id="supplier-filter">
+                <option value="todos">Proveedores</option>
+                <option value="personal">Personal</option>
+                <option value="tigo">Tigo</option>
+            </select>
+            <select id="connection-filter">
+                <option value="todos">Tipo de Conexión</option>
+                <option value="fiber">Fibra Óptica</option>
+                <option value="modem">Módem</option>
+                <option value="hfc">Conexión HFC</option>
+            </select>
+            <select id="data-view-filter">
+                <option value="cuenta">Mostrar Cuenta</option>
+                <option value="contrato">Mostrar Contrato</option>
+            </select>
+            <input type="text" id="search-input" placeholder="Buscar por ATM o Cuenta/Contrato...">
+        </div>
+
+        <table id="atm-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select-all-checkbox"></th>
+                    <th>Punto de Venta / ATM</th>
+                    <th>Proveedor</th>
+                    <th class="accounts-column">Cuentas / Contratos</th>
+                    <th class="connection-cell">Tipo de Conexión</th>
+                    <th>Coordenadas</th>
+                    <th>Visita Técnica Agendada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-date="20/08/2025">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Supermercado Gran Vía - Royal Plaza</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="210588" data-contrato="ContratoA1" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="25/08/2025">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">SHELL SURUBIÍ MRA</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="211873" data-contrato="ContratoB2" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="10/09/2025">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">SHELL AVIADORES</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210829217" data-contrato="ContratoC3" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Petrobras EL PORTAL Loma Pyta</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="208908" data-contrato="ContratoD4" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Supermercado Los Jardines Fernando I GLORY</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210014107" data-contrato="ContratoE5" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Antell Suc. Casa Matriz</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4209408522" data-contrato="ContratoF6" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Copetrol COLÓN</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="213635" data-contrato="ContratoG7" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Petrobras AUTOPISTA Luque</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210503543" data-contrato="ContratoH8" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Supermercado Los Jardines Todo Carne</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210099618" data-contrato="ContratoI9" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Los Jardines Gral Quino</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210829233" data-contrato="ContratoJ10" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Farmatotal Rca. Argentina</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210032045" data-contrato="ContratoK11" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Supermercado Los Jardines Luque II</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210099522" data-contrato="ContratoL12" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Copetrol CORRALES Luque</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210829193" data-contrato="ContratoM13" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Copetrol Mariano</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210829280" data-contrato="ContratoN14" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Copetrol MCAL. LOPEZ</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="217196" data-contrato="ContratoO15" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Central Parking</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4209703054" data-contrato="ContratoP16" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Copetrol Oviedo</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210032034" data-contrato="ContratoQ17" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Supermercado Los Jardines Morakue</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210829288" data-contrato="ContratoR18" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Supermercado Los Jardines Fernando II</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210014107" data-contrato="ContratoS19" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ATM - Eglobal - SHELL San Martin & Aviadores</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4209912249" data-contrato="ContratoT20" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ATM - Eglobal - BR M.R.A</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4209912300" data-contrato="ContratoU21" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Supermercado Los Jardines Limpio</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210099645" data-contrato="ContratoV22" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ATM - FORTIS M.R.A</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="229722" data-contrato="ContratoW23" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ATM - FORTIS JOCKEY</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="229720" data-contrato="ContratoX24" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ATM - FORTIS PJC</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="231582" data-contrato="ContratoY25" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">SHELL GM AREGUA</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210221839" data-contrato="ContratoZ26" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ENEX Brasilia GP</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210321731" data-contrato="ContratoAA27" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ENEX DEFENSORES DEL CHACO GP</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210321722" data-contrato="ContratoBB28" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ENEX - 1ER PRESIDENTE</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210430028" data-contrato="ContratoCC29" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">COPETROL YPAKARAI</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210281123" data-contrato="ContratoDD30" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ENEX - Lillo</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210829288" data-contrato="ContratoEE31" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Copetrol AEROPUERTO Luque</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4209912249" data-contrato="ContratoFF32" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">SHELL PACHECO</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4209912300" data-contrato="ContratoGG33" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ATM - TIGO 4M</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210099645" data-contrato="ContratoHH34" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ENEX - CAPIATA</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="229722" data-contrato="ContratoII35" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">ATM - FORTIS SUC 2</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="229722" data-contrato="ContratoJJ36" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">FORTIS CONCEPCIÓN</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="229722" data-contrato="ContratoKK37" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">PETROBRAS ÑEMBY</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210430028" data-contrato="ContratoLL38" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">Petrobras ÑEMBY 2</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210430028" data-contrato="ContratoMM39" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">SHELL ÑEMBY</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210221839" data-contrato="ContratoNN40" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">SHELL LUQUE</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210321731" data-contrato="ContratoOO41" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">SHELL ASUNCION</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210321722" data-contrato="ContratoPP42" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">PETROBRAS ASUNCIÓN</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210430028" data-contrato="ContratoQQ43" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">PETROBRAS ASUNCIÓN 2</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="4210281123" data-contrato="ContratoRR44" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">PETROBRAS ASUNCIÓN 3</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="210588" data-contrato="ContratoSS45" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+                <tr data-date="">
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">PETROBRAS ASUNCIÓN 4</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal">Personal</option>
+                            <option value="tigo">Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="211873" data-contrato="ContratoTT46" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber">Fibra Óptica</option>
+                            <option value="modem">Módem</option>
+                            <option value="hfc">Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="" contenteditable="true"></td>
+                    <td class="status-cell"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <button id="prev-btn">Anterior</button>
+            <span id="page-info">Página 1 de 1</span>
+            <button id="next-btn">Siguiente</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const table = document.getElementById('atm-table');
+            const tbody = table.querySelector('tbody');
+            const statusFilter = document.getElementById('status-filter');
+            const supplierFilter = document.getElementById('supplier-filter');
+            const connectionFilter = document.getElementById('connection-filter');
+            const searchInput = document.getElementById('search-input');
+            const dataViewFilter = document.getElementById('data-view-filter');
+            const totalATMs = document.getElementById('total-atms');
+            const agendadasCount = document.getElementById('agendadas-count');
+            const completadasCount = document.getElementById('completadas-count');
+            const addAtmBtn = document.getElementById('add-atm-btn');
+            const deleteAtmBtn = document.getElementById('delete-atm-btn');
+            const selectAllCheckbox = document.getElementById('select-all-checkbox');
+            
+            // Pagination variables and elements
+            const rowsPerPage = 10;
+            let currentPage = 1;
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const pageInfo = document.getElementById('page-info');
+
+            const dataKey = 'atmDashboardData';
+
+            function getTableRows() {
+                return Array.from(tbody.querySelectorAll('tr'));
+            }
+
+            function saveData() {
+                const data = [];
+                getTableRows().forEach(row => {
+                    const rowData = {
+                        atm: row.querySelector('td:nth-child(2)').textContent,
+                        supplier: row.querySelector('.supplier-select').value,
+                        cuenta: row.querySelector('.editable[data-cuenta]').getAttribute('data-cuenta'),
+                        contrato: row.querySelector('.editable[data-contrato]').getAttribute('data-contrato'),
+                        date: row.getAttribute('data-date') || '',
+                        connectionType: row.querySelector('.connection-select').value,
+                        coords: row.querySelector('.editable[data-coords]').getAttribute('data-coords')
+                    };
+                    data.push(rowData);
+                });
+                localStorage.setItem(dataKey, JSON.stringify(data));
+            }
+
+            function createRowFromData(rowData) {
+                const newRow = document.createElement('tr');
+                newRow.setAttribute('data-date', rowData.date);
+                newRow.innerHTML = `
+                    <td><input type="checkbox" class="row-checkbox"></td>
+                    <td class="editable" contenteditable="true">${rowData.atm}</td>
+                    <td class="supplier-cell">
+                        <select class="supplier-select">
+                            <option value="">Seleccionar</option>
+                            <option value="personal" ${rowData.supplier === 'personal' ? 'selected' : ''}>Personal</option>
+                            <option value="tigo" ${rowData.supplier === 'tigo' ? 'selected' : ''}>Tigo</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-cuenta="${rowData.cuenta}" data-contrato="${rowData.contrato}" contenteditable="true"></td>
+                    <td class="connection-cell">
+                        <select class="connection-select">
+                            <option value="">Seleccionar</option>
+                            <option value="fiber" ${rowData.connectionType === 'fiber' ? 'selected' : ''}>Fibra Óptica</option>
+                            <option value="modem" ${rowData.connectionType === 'modem' ? 'selected' : ''}>Módem</option>
+                            <option value="hfc" ${rowData.connectionType === 'hfc' ? 'selected' : ''}>Conexión HFC</option>
+                        </select>
+                    </td>
+                    <td class="editable" data-coords="${rowData.coords}" contenteditable="true">${rowData.coords}</td>
+                    <td class="status-cell"></td>
+                `;
+                return newRow;
+            }
+
+            function loadData() {
+                const storedData = localStorage.getItem(dataKey);
+                if (storedData) {
+                    const data = JSON.parse(storedData);
+                    tbody.innerHTML = '';
+                    data.forEach(rowData => {
+                        const newRow = createRowFromData(rowData);
+                        tbody.appendChild(newRow);
+                    });
+                }
+                updateAccountDisplay();
+                initializeRowEventListeners();
+            }
+
+            function updateAccountDisplay() {
+                const view = dataViewFilter.value;
+                getTableRows().forEach(row => {
+                    const dataCell = row.querySelector('.editable[data-cuenta]');
+                    if (dataCell) {
+                        dataCell.textContent = dataCell.getAttribute(`data-${view}`);
+                    }
+                });
+                filterTable();
+            }
+
+            function updateStatusCell(cell, date) {
+                cell.innerHTML = '';
+                cell.className = 'status-cell';
+                if (date) {
+                    const [day, month, year] = date.split('/').map(Number);
+                    const visitDate = new Date(year, month - 1, day);
+                    const formattedDate = `${day}/${month}`;
+                    
+                    if (visitDate < today) {
+                        cell.classList.add('status-vencida');
+                        cell.innerHTML = `⚠️ Vencida ${formattedDate}`;
+                        cell.closest('tr').setAttribute('data-status', 'vencida');
+                    } else {
+                        cell.classList.add('status-agendada');
+                        cell.innerHTML = `📅 Agendada ${formattedDate}`;
+                        cell.closest('tr').setAttribute('data-status', 'agendada');
+                    }
+                } else {
+                    cell.classList.add('status-completada');
+                    cell.innerHTML = `✅ Completada`;
+                    cell.closest('tr').setAttribute('data-status', 'completada');
+                }
+            }
+            
+            function updateRowDisplay(row) {
+                const statusCell = row.querySelector('.status-cell');
+                const dateAttr = row.getAttribute('data-date');
+                updateStatusCell(statusCell, dateAttr);
+            }
+
+            function filterTable() {
+                const rows = getTableRows();
+                const filteredRows = rows.filter(row => {
+                    const selectedStatus = statusFilter.value;
+                    const selectedSupplier = supplierFilter.value;
+                    const selectedConnection = connectionFilter.value;
+                    const searchTerm = searchInput.value.toLowerCase();
+                    
+                    const rowStatus = row.getAttribute('data-status');
+                    const rowSupplier = row.querySelector('.supplier-select').value;
+                    const rowConnection = row.querySelector('.connection-select').value;
+                    const atmName = row.querySelector('.editable:nth-child(2)').textContent.toLowerCase();
+                    const dataCell = row.querySelector('.editable[data-cuenta]');
+                    const coordsCell = row.querySelector('.editable[data-coords]');
+                    const rowCuenta = dataCell ? dataCell.getAttribute('data-cuenta').toLowerCase() : '';
+                    const rowContrato = dataCell ? dataCell.getAttribute('data-contrato').toLowerCase() : '';
+                    const rowCoords = coordsCell ? coordsCell.textContent.toLowerCase() : '';
+                    
+                    const matchesSearch = atmName.includes(searchTerm) || rowCuenta.includes(searchTerm) || rowContrato.includes(searchTerm) || rowCoords.includes(searchTerm);
+                    const matchesStatus = (selectedStatus === 'todos' || rowStatus === selectedStatus);
+                    const matchesSupplier = (selectedSupplier === 'todos' || rowSupplier === selectedSupplier);
+                    const matchesConnection = (selectedConnection === 'todos' || rowConnection === selectedConnection);
+
+                    return matchesSearch && matchesStatus && matchesSupplier && matchesConnection;
+                });
+
+                const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+                currentPage = Math.min(currentPage, Math.max(1, totalPages)); // Adjust currentPage if it's out of bounds
+
+                rows.forEach(row => row.style.display = 'none');
+
+                const start = (currentPage - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+                const pageRows = filteredRows.slice(start, end);
+
+                pageRows.forEach(row => row.style.display = '');
+
+                pageInfo.textContent = `Página ${currentPage} de ${totalPages || 1}`;
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage >= totalPages;
+            }
+
+            function goToNextPage() {
+                const filteredRowsCount = getTableRows().filter(row => {
+                    const selectedStatus = statusFilter.value;
+                    const selectedSupplier = supplierFilter.value;
+                    const selectedConnection = connectionFilter.value;
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const rowStatus = row.getAttribute('data-status');
+                    const rowSupplier = row.querySelector('.supplier-select').value;
+                    const rowConnection = row.querySelector('.connection-select').value;
+                    const atmName = row.querySelector('.editable:nth-child(2)').textContent.toLowerCase();
+                    const dataCell = row.querySelector('.editable[data-cuenta]');
+                    const coordsCell = row.querySelector('.editable[data-coords]');
+                    const rowCuenta = dataCell ? dataCell.getAttribute('data-cuenta').toLowerCase() : '';
+                    const rowContrato = dataCell ? dataCell.getAttribute('data-contrato').toLowerCase() : '';
+                    const rowCoords = coordsCell ? coordsCell.textContent.toLowerCase() : '';
+                    const matchesSearch = atmName.includes(searchTerm) || rowCuenta.includes(searchTerm) || rowContrato.includes(searchTerm) || rowCoords.includes(searchTerm);
+                    const matchesStatus = (selectedStatus === 'todos' || rowStatus === selectedStatus);
+                    const matchesSupplier = (selectedSupplier === 'todos' || rowSupplier === selectedSupplier);
+                    const matchesConnection = (selectedConnection === 'todos' || rowConnection === selectedConnection);
+                    return matchesSearch && matchesStatus && matchesSupplier && matchesConnection;
+                }).length;
+                const totalPages = Math.ceil(filteredRowsCount / rowsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    filterTable();
+                }
+            }
+
+            function goToPrevPage() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    filterTable();
+                }
+            }
+            
+            function updateDashboard() {
+                let agendadas = 0;
+                let completadas = 0;
+                
+                getTableRows().forEach(row => {
+                    updateRowDisplay(row);
+                    const rowStatus = row.getAttribute('data-status');
+                    if (rowStatus === 'agendada' || rowStatus === 'vencida') {
+                        agendadas++;
+                    } else if (rowStatus === 'completada') {
+                        completadas++;
+                    }
+                });
+
+                totalATMs.textContent = getTableRows().length;
+                agendadasCount.textContent = agendadas;
+                completadasCount.textContent = completadas;
+                
+                filterTable();
+                saveData();
+            }
+
+            function initializeRowEventListeners() {
+                // Funcionalidad de edición para las celdas de ATM, Cuenta y Coordenadas
+                const editableCells = tbody.querySelectorAll('.editable');
+                editableCells.forEach(cell => {
+                    cell.removeEventListener('blur', handleCellBlur);
+                    cell.addEventListener('blur', handleCellBlur);
+                });
+
+                // Funcionalidad para actualizar el tipo de conexión y proveedor
+                const selects = tbody.querySelectorAll('.connection-select, .supplier-select');
+                selects.forEach(select => {
+                    select.removeEventListener('change', handleSelectChange);
+                    select.addEventListener('change', handleSelectChange);
+                });
+
+                // Funcionalidad para editar fechas
+                const dateCells = tbody.querySelectorAll('td.status-cell');
+                dateCells.forEach(cell => {
+                    cell.removeEventListener('click', handleDateCellClick);
+                    cell.addEventListener('click', handleDateCellClick);
+                });
+
+                // Checkbox functionality
+                const checkboxes = tbody.querySelectorAll('.row-checkbox');
+                checkboxes.forEach(checkbox => {
+                    checkbox.removeEventListener('change', handleRowCheckboxChange);
+                    checkbox.addEventListener('change', handleRowCheckboxChange);
+                });
+            }
+
+            function handleCellBlur(event) {
+                const cell = event.target;
+                if (cell.hasAttribute('data-cuenta')) {
+                    const view = dataViewFilter.value;
+                    const dataKey = `data-${view}`;
+                    cell.setAttribute(dataKey, cell.textContent.trim());
+                } else if (cell.hasAttribute('data-coords')) {
+                    cell.setAttribute('data-coords', cell.textContent.trim());
+                }
+                saveData();
+                filterTable();
+            }
+
+            function handleSelectChange() {
+                saveData();
+                filterTable();
+            }
+
+            function handleDateCellClick(event) {
+                const cell = event.currentTarget;
+                const row = cell.closest('tr');
+                const currentDate = row.getAttribute('data-date');
+                
+                let newDate = "";
+                if (currentDate) {
+                    newDate = prompt("Ingresa la nueva fecha (DD/MM/YYYY):", currentDate);
+                } else {
+                    newDate = prompt("Ingresa la fecha (DD/MM/YYYY):");
+                }
+
+                if (newDate !== null) {
+                    const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+                    if (dateRegex.test(newDate)) {
+                        row.setAttribute('data-date', newDate);
+                    } else if (newDate.trim() === '') {
+                         row.setAttribute('data-date', '');
+                    } else {
+                        alert("Formato de fecha inválido. Por favor, usa DD/MM/YYYY.");
+                    }
+                }
+                updateDashboard();
+            }
+
+            function handleRowCheckboxChange() {
+                const checkboxes = tbody.querySelectorAll('.row-checkbox');
+                const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                selectAllCheckbox.checked = allChecked;
+            }
+
+            function addAtmRow() {
+                const newRowData = {
+                    atm: 'Nuevo ATM',
+                    supplier: '',
+                    cuenta: new Date().getTime().toString(),
+                    contrato: 'Nuevo Contrato',
+                    date: '',
+                    connectionType: '',
+                    coords: ''
+                };
+                const newRow = createRowFromData(newRowData);
+                tbody.prepend(newRow);
+                updateDashboard();
+                initializeRowEventListeners();
+            }
+
+            function deleteSelectedAtms() {
+                const checkboxes = tbody.querySelectorAll('.row-checkbox:checked');
+                if (checkboxes.length === 0) {
+                    alert('Por favor, selecciona al menos un ATM para eliminar.');
+                    return;
+                }
+                if (confirm(`¿Estás seguro de que quieres eliminar ${checkboxes.length} ATM(s) seleccionado(s)?`)) {
+                    checkboxes.forEach(checkbox => {
+                        const row = checkbox.closest('tr');
+                        row.remove();
+                    });
+                    updateDashboard();
+                }
+            }
+
+            // Event listeners
+            statusFilter.addEventListener('change', filterTable);
+            supplierFilter.addEventListener('change', filterTable);
+            connectionFilter.addEventListener('change', filterTable);
+            searchInput.addEventListener('keyup', filterTable);
+            dataViewFilter.addEventListener('change', updateAccountDisplay);
+            prevBtn.addEventListener('click', goToPrevPage);
+            nextBtn.addEventListener('click', goToNextPage);
+            addAtmBtn.addEventListener('click', addAtmRow);
+            deleteAtmBtn.addEventListener('click', deleteSelectedAtms);
+            selectAllCheckbox.addEventListener('change', (event) => {
+                const isChecked = event.target.checked;
+                tbody.querySelectorAll('.row-checkbox').forEach(checkbox => {
+                    checkbox.checked = isChecked;
+                });
+            });
+
+            // Inicialización de datos
+            loadData();
+            updateDashboard();
+        });
+    </script>
+</body>
+</html>
