@@ -1617,5 +1617,26 @@
             updateDashboard();
         });
     </script>
+<script>
+async function cargarDatos() {
+  const resp = await fetch('datos.json');   // archivo con tus datos
+  const datos = await resp.json();
+
+  const tbody = document.querySelector("tbody");
+
+  tbody.innerHTML = datos.map(d => `
+    <tr>
+      <td>${d.atm ?? ''}</td>
+      <td>${d.supplier ?? ''}</td>
+      <td>${d.account ?? ''}</td>
+      <td>${d.connectionType ?? ''}</td>
+      <td>${d.coordinates ?? ''}</td>
+      <td>${d.visit ?? ''}</td>
+    </tr>
+  `).join('');
+}
+
+cargarDatos();
+</script>
 </body>
 </html>
