@@ -1,0 +1,1127 @@
+[
+  {
+    "atm": "STOCK EXPRESS TTE MOLAS",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "8969308",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.36098464086814, -57.50450876011516"
+  },
+  {
+    "atm": "STOCK EXPRESS DE LA VICTORIA",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "8999867",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.356766746808397, -57.49100370067204"
+  },
+  {
+    "atm": "SHELL GM CAPIATA",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "10641312",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.35191124066901, -57.445758983964225"
+  },
+  {
+    "atm": "DON VITO MOLAS LOPEZ ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "12541041",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.26943736977347, -57.57247920359001"
+  },
+  {
+    "atm": "DON VITO FELIX BOGADO",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "12541063",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.29984466712948, -57.63195037871365"
+  },
+  {
+    "atm": "DON VITO EUSEBIO AYALA",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "12541084",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.31261556041442, -57.58544357032201"
+  },
+  {
+    "atm": "DON VITO GRAL SANTOS ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "12526512",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.29655053484233, -57.61232431792689"
+  },
+  {
+    "atm": "BIGGIE SAN PEDRO ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "12526522",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.365245887687877, -57.48489007116398"
+  },
+  {
+    "atm": "BIGGIE LEOPARDI ",
+    "supplier": "personal",
+    "cuenta": "",
+    "contrato": "",
+    "date": "",
+    "connectionType": "",
+    "coords": ""
+  },
+  {
+    "atm": "",
+    "supplier": "",
+    "cuenta": "",
+    "contrato": "",
+    "date": "",
+    "connectionType": "",
+    "coords": ""
+  },
+  {
+    "atm": "ENEX CAMPO VIA ",
+    "supplier": "personal",
+    "cuenta": "18331516",
+    "contrato": "10716213",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.30526540539847, -57.49134752078967"
+  },
+  {
+    "atm": "LOS JARDINES LEOPARDI",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "10868019",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.34686559904438, -57.54954134640067"
+  },
+  {
+    "atm": "PETROPAR LAGUNA ",
+    "supplier": "personal",
+    "cuenta": "18634210",
+    "contrato": "11031231",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.308601187616894, -57.527857450281566"
+  },
+  {
+    "atm": "PETROMAX ARTIGAS ",
+    "supplier": "personal",
+    "cuenta": "18648790",
+    "contrato": "11046944",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.263246775407378, -57.5929305000372"
+  },
+  {
+    "atm": "ENEX LEOPARDI",
+    "supplier": "personal",
+    "cuenta": "18694858",
+    "contrato": "11094268",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.33253135668484, -57.54036939052073"
+  },
+  {
+    "atm": "STOCK EXPRESS PANCHITO LOPEZ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "8969097",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.36607338089582, -57.4683796627126"
+  },
+  {
+    "atm": "ENEX ÑEMMBY  RINCON ",
+    "supplier": "personal",
+    "cuenta": "19344125",
+    "contrato": "11807962",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.391845701233443, -57.52660892732382"
+  },
+  {
+    "atm": "SHELL SACRAMENTO ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "11808003",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.26711372818438, -57.582697791206584"
+  },
+  {
+    "atm": "BASE FDO DE LA MORA- ABASTO",
+    "supplier": "personal",
+    "cuenta": "9800383",
+    "contrato": "10100404",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.329246080191652, -57.57252724389745"
+  },
+  {
+    "atm": "PETROBRAS MBURUCUYA",
+    "supplier": "personal",
+    "cuenta": "17985626",
+    "contrato": "10364997",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.269509269549616, -57.563322253968614"
+  },
+  {
+    "atm": "COPETROL KM 11",
+    "supplier": "personal",
+    "cuenta": "18030055",
+    "contrato": "10408889",
+    "date": "",
+    "connectionType": "",
+    "coords": "-25.340733303523688, -57.52041790787294"
+  },
+  {
+    "atm": "SHELL GM KM 5",
+    "supplier": "personal",
+    "cuenta": "18259059",
+    "contrato": "10641166",
+    "date": "",
+    "connectionType": "",
+    "coords": "-25.315902470334237, -57.574803944698836"
+  },
+  {
+    "atm": "SHELL GM ITA ENRRAMADA ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "10641222",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.359213129560548, -57.64478211268157"
+  },
+  {
+    "atm": "COPETROL SANTA LUCIA ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "10641533",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.342280383626633, -57.49559121525878"
+  },
+  {
+    "atm": "COPETROL ANTARES ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "10641517",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.34176019013902, -57.49550543329931"
+  },
+  {
+    "atm": "COPETROL ITAGUA ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "10641436",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.3960948471199, -57.348006575376886"
+  },
+  {
+    "atm": "COPETROL MUNDO ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "10641396",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.318121132346814, -57.525722268221955"
+  },
+  {
+    "atm": "PETROMAX BOGGUIANI ",
+    "supplier": "personal",
+    "cuenta": "18382487",
+    "contrato": "10767921",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.316151708212, -57.56648246052218"
+  },
+  {
+    "atm": "ENEX- SAN ANTONIO",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "9292969",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.41540971506272, -57.57298399248912"
+  },
+  {
+    "atm": "SHELL ITANARA",
+    "supplier": "personal",
+    "cuenta": "9701271",
+    "contrato": "9990674",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.299958429864713, -57.5032999889056"
+  },
+  {
+    "atm": "COPETROL KM 14",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "10026461",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.346629656523017, -57.498750218125224"
+  },
+  {
+    "atm": "SHELL YVAPOVO",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "10144876",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.331495846478873, -57.59234404599716"
+  },
+  {
+    "atm": "SHELL GM BOTANICO ",
+    "supplier": "personal",
+    "cuenta": "9840307",
+    "contrato": "10144667",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.253711409220724, -57.575515507398606"
+  },
+  {
+    "atm": "COPETROL SALADO",
+    "supplier": "personal",
+    "cuenta": "9840470",
+    "contrato": "10144845",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.185747498343087, -57.464928025741635"
+  },
+  {
+    "atm": "SHELL REMANSO ",
+    "supplier": "personal",
+    "cuenta": "CUENTA",
+    "contrato": "10144806",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.191354264156626, -57.53769050535384"
+  },
+  {
+    "atm": "Petrobras Corrales",
+    "supplier": "",
+    "cuenta": "CUENTA",
+    "contrato": "10238752",
+    "date": "",
+    "connectionType": "",
+    "coords": "-25.264425124283466, -57.48408153473016"
+  },
+  {
+    "atm": "Copetrol Bartolomé ",
+    "supplier": "personal",
+    "cuenta": "13022963",
+    "contrato": "2024364",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.306904112400094, -57.60218904279385"
+  },
+  {
+    "atm": "Shell Bahia Botanico sacramento",
+    "supplier": "personal",
+    "cuenta": "14278906",
+    "contrato": "6679349",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.25221936305616, -57.578942478996034"
+  },
+  {
+    "atm": "Copetrol Botanico ",
+    "supplier": "personal",
+    "cuenta": "14278906",
+    "contrato": "6683017",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.25592984892189, -57.57168077097706"
+  },
+  {
+    "atm": "Shell Bahia Sacramento",
+    "supplier": "personal",
+    "cuenta": "6679349",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.25215256916744, -57.57896214537089"
+  },
+  {
+    "atm": "Shell Conatel ",
+    "supplier": "personal",
+    "cuenta": "13024531",
+    "contrato": "2024365",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.278876904330545, -57.63874783311859"
+  },
+  {
+    "atm": "Supermercado La Bomba casa matriz",
+    "supplier": "personal",
+    "cuenta": "13770345",
+    "contrato": "6139091",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.325107408269172, -57.59931891883986"
+  },
+  {
+    "atm": "ENEX-UNA SAN LORENZO",
+    "supplier": "personal",
+    "cuenta": "14278906",
+    "contrato": "8625100",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.33280094249305, -57.51414015148894"
+  },
+  {
+    "atm": "ENERGY-SEMINARIO",
+    "supplier": "personal",
+    "cuenta": "16252780",
+    "contrato": "9289787",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.298524613945137, -57.603139627579885"
+  },
+  {
+    "atm": "SHELL BAHIA SAN NICOLAS ",
+    "supplier": "tigo",
+    "cuenta": "4211109554",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.334514609557466, -57.53440230060147"
+  },
+  {
+    "atm": "PETROPAR CACIQUE ",
+    "supplier": "tigo",
+    "cuenta": "4211109614",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.34210876944777, -57.60529017718471"
+  },
+  {
+    "atm": "PETROPAR MADAME LINCH",
+    "supplier": "tigo",
+    "cuenta": "4211109622",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.313857517009914, -57.5556419405544"
+  },
+  {
+    "atm": "ENEX VILLA ELISA ",
+    "supplier": "tigo",
+    "cuenta": "4211109626",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "",
+    "coords": "-25.367231330767144, -57.58763283981597"
+  },
+  {
+    "atm": "SHELL BAHIA SNA LORENZO ",
+    "supplier": "tigo",
+    "cuenta": "4211114716",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.341621552698523, -57.50356352244948"
+  },
+  {
+    "atm": "Petrobras Artigas ",
+    "supplier": "tigo",
+    "cuenta": "4210959448",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "PENDIENTE"
+  },
+  {
+    "atm": "Shell GM Mcal Lopez",
+    "supplier": "tigo",
+    "cuenta": "4211089729",
+    "contrato": "4211089729",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.300207157529663, -57.566491383416796"
+  },
+  {
+    "atm": "Shell GM Felix Bogado",
+    "supplier": "tigo",
+    "cuenta": "4211089705",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.32745435787095, -57.6268169318117"
+  },
+  {
+    "atm": "Shell GM Peru",
+    "supplier": "tigo",
+    "cuenta": "4211089702",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.28461163603381, -57.616228547948246"
+  },
+  {
+    "atm": "Shell GM Lomas Valentinas",
+    "supplier": "tigo",
+    "cuenta": "4211089694",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.30062116884264, -57.62767503985853"
+  },
+  {
+    "atm": "Shell GM San Vicente SIRIO",
+    "supplier": "tigo",
+    "cuenta": "4211089710",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.334585494833103, -57.625443410059965"
+  },
+  {
+    "atm": "CASA GRUTER ",
+    "supplier": "tigo",
+    "cuenta": "4211106878",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "",
+    "coords": "-25.33386222618149, -57.577484386383844"
+  },
+  {
+    "atm": "STOCK EXPRESS-ESPAÑA",
+    "supplier": "tigo",
+    "cuenta": "4211082665",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "",
+    "coords": "-25.286606336022658, -57.58852024105364"
+  },
+  {
+    "atm": "SHELL BAHIA ACCESO SUR",
+    "supplier": "tigo",
+    "cuenta": "4211109542",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.440975393188943, -57.536199111596915"
+  },
+  {
+    "atm": "PETROBRAS OVIEDO ",
+    "supplier": "tigo",
+    "cuenta": "4211114598",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.44861586671021, -56.44168244232811"
+  },
+  {
+    "atm": "SHELL SALADO ",
+    "supplier": "tigo",
+    "cuenta": "4209915298",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.185258665370018, -57.465444847237144"
+  },
+  {
+    "atm": " SHELL- LAURELTY",
+    "supplier": "tigo",
+    "cuenta": "4210324825",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.287707943667304, -57.49995919049346"
+  },
+  {
+    "atm": "SHELL BAHIA YVERA",
+    "supplier": "tigo",
+    "cuenta": "4210363329",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.33658959361112, -57.51074171223609"
+  },
+  {
+    "atm": " Tigo Kingo Avelino",
+    "supplier": "tigo",
+    "cuenta": "223343",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.355307603604896, -57.54282133461081"
+  },
+  {
+    "atm": "Los Jardines Primavera",
+    "supplier": "tigo",
+    "cuenta": "4210503529",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.271437784898048, -57.475580102765285"
+  },
+  {
+    "atm": "Shell Bahia Cacique",
+    "supplier": "tigo",
+    "cuenta": "4209912255",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.342674260956578, -57.606008618126204"
+  },
+  {
+    "atm": "Shell Limpio 17,5",
+    "supplier": "tigo",
+    "cuenta": "4209912286",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "A DEFINIR"
+  },
+  {
+    "atm": "STOCK EXPRESS-ESPAÑA",
+    "supplier": "tigo",
+    "cuenta": "4211082665",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.286599603006138, -57.5883051453709"
+  },
+  {
+    "atm": "COPETROL FERROCARRIL ",
+    "supplier": "tigo",
+    "cuenta": "4211078236",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.28271354491299, -57.63013205867328"
+  },
+  {
+    "atm": "GRAN VIA EUSEBIO AYALA ",
+    "supplier": "tigo",
+    "cuenta": "4210982440",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.308172363354302, -57.59673394414729"
+  },
+  {
+    "atm": "ENEX REPUBLICA ARGENTINA ",
+    "supplier": "tigo",
+    "cuenta": "4210981610",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.299309154710087, -57.57985290738392"
+  },
+  {
+    "atm": "GRAN VIA LUQUE ",
+    "supplier": "tigo",
+    "cuenta": "1200916788",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.280550144025597, -57.52581653590118"
+  },
+  {
+    "atm": "COPETROL 25 DE MAYO ",
+    "supplier": "tigo",
+    "cuenta": "4210968534",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.301178742074338, -57.59532651025341"
+  },
+  {
+    "atm": "GRAN VIA ÑEEMBY ",
+    "supplier": "tigo",
+    "cuenta": "4210982446",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.395419520770833, -57.54548215527003"
+  },
+  {
+    "atm": "STOCK EXPRESS-ACOSTA ÑU",
+    "supplier": "tigo",
+    "cuenta": "4210243104",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.392730490306157, -57.497779655282386"
+  },
+  {
+    "atm": "SHELL AVELINO MARTINEZ ",
+    "supplier": "tigo",
+    "cuenta": "4210910174",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.342006732133935, -57.51605483206343"
+  },
+  {
+    "atm": "STOCK EXPRESS MOLAS LOPEZ",
+    "supplier": "tigo",
+    "cuenta": "4210430369",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.27860668784476, -57.56267343253922"
+  },
+  {
+    "atm": "STOCK EXPRESS PERU Y AZARA",
+    "supplier": "tigo",
+    "cuenta": "4210430401",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.292216599696552, -57.62109739497572"
+  },
+  {
+    "atm": "STOCK EXPRESS SACRAMENTO IPS",
+    "supplier": "tigo",
+    "cuenta": "4210430388",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.26767402847097, -57.58343878129141"
+  },
+  {
+    "atm": "ENEX FELIX BOGADO",
+    "supplier": "tigo",
+    "cuenta": "4210946930",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.317322345773036, -57.62916451773386"
+  },
+  {
+    "atm": "PETROMAX TALAVERA ",
+    "supplier": "tigo",
+    "cuenta": "4210948275",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.304328137878894, -57.558076044855724"
+  },
+  {
+    "atm": "ENEX ARTIGAS ",
+    "supplier": "tigo",
+    "cuenta": "4210946901",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.273089400602522, -57.60621904344655"
+  },
+  {
+    "atm": "PETROBRAS YACARE VALIJA ",
+    "supplier": "tigo",
+    "cuenta": "4210966732",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.34471123997775, -57.588461639252856"
+  },
+  {
+    "atm": "SHELL PARIRI",
+    "supplier": "tigo",
+    "cuenta": "4210968520",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.315818871138262, -57.608568154902066"
+  },
+  {
+    "atm": "SHELL EUSEBIO AYALA ",
+    "supplier": "tigo",
+    "cuenta": "4210973655",
+    "contrato": "Nuevo Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.308455854662103, -57.59616582403201"
+  },
+  {
+    "atm": "TIGO 4M",
+    "supplier": "tigo",
+    "cuenta": "4210606007",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.34718078785007, -57.57194119715409"
+  },
+  {
+    "atm": "ENEX - CAPIATA",
+    "supplier": "tigo",
+    "cuenta": "4210639710",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.37770891141216, -57.41027451845571"
+  },
+  {
+    "atm": "BASE FDO DE LA MORA- ABASTO",
+    "supplier": "tigo",
+    "cuenta": "4210686041",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.32982487382808, -57.572384595791824"
+  },
+  {
+    "atm": "STOCK EXPRESS BRASILIA",
+    "supplier": "tigo",
+    "cuenta": "4210430356",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.28415564973063, -57.60149241115178"
+  },
+  {
+    "atm": "ENEX SANTA TERESA ",
+    "supplier": "tigo",
+    "cuenta": "4210776347",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.300688322844188, -57.54198523151107"
+  },
+  {
+    "atm": "ENEX SACRAMENTO ",
+    "supplier": "tigo",
+    "cuenta": "4210785626",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.286245024255283, -57.58893074417975"
+  },
+  {
+    "atm": "PETROMAX MARIANO EXPO",
+    "supplier": "tigo",
+    "cuenta": "1200860338",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.2308020867575, -57.53601743358021"
+  },
+  {
+    "atm": "COPETROL PARAGUARI",
+    "supplier": "tigo",
+    "cuenta": "4210877757",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.631106229122818, -57.149169496439974"
+  },
+  {
+    "atm": "GLORY FILADELFIA ",
+    "supplier": "tigo",
+    "cuenta": "871208",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-22.36015148452386, -60.03151281613633"
+  },
+  {
+    "atm": "CHORTITZER LOMA PLTA ",
+    "supplier": "tigo",
+    "cuenta": "1200858738",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-22.38024089115122, -59.83528957146333"
+  },
+  {
+    "atm": "SHELL GM AREGUA ",
+    "supplier": "tigo",
+    "cuenta": "4210221839",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.308966768487874, -57.38213689377273"
+  },
+  {
+    "atm": "ENEX BRASILIA",
+    "supplier": "tigo",
+    "cuenta": "4210321731",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.292151317279615, -57.60287055473752"
+  },
+  {
+    "atm": "ENEX DEFENSORES DEL CHACO",
+    "supplier": "tigo",
+    "cuenta": "4210321722",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.322371927029927, -57.56280078337658"
+  },
+  {
+    "atm": "Enex Primer Presidente",
+    "supplier": "tigo",
+    "cuenta": "4210430028",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.322379884380588, -57.562799613356844"
+  },
+  {
+    "atm": "COPETROL YPAKARAI",
+    "supplier": "tigo",
+    "cuenta": "4210281123",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.394792560220562, -57.27909557166832"
+  },
+  {
+    "atm": "ENEX- Lillo",
+    "supplier": "tigo",
+    "cuenta": "4210453001",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.292968546417395, -57.555318697520406"
+  },
+  {
+    "atm": "Copetrol Gs - Aeropuerto",
+    "supplier": "tigo",
+    "cuenta": "4210829264",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.245510970425073, -57.51132376494865"
+  },
+  {
+    "atm": "SHELL PACHECO",
+    "supplier": "tigo",
+    "cuenta": "4210578186",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.294289432123357, -57.592325937712424"
+  },
+  {
+    "atm": "Central Parking ",
+    "supplier": "tigo",
+    "cuenta": "4209703054",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.286546212777807, -57.63833736134272"
+  },
+  {
+    "atm": "Copetrol Oviedo",
+    "supplier": "tigo",
+    "cuenta": "4210032034",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "Cajero del Interior"
+  },
+  {
+    "atm": "Supermercado Los Jardines Morakue",
+    "supplier": "tigo",
+    "cuenta": "4210829288",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.23428895779447, -57.47550546375749"
+  },
+  {
+    "atm": "Supermercado Los Jardines Fernando II",
+    "supplier": "tigo",
+    "cuenta": "4210014107",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.312640986919053, -57.542118133258334"
+  },
+  {
+    "atm": "SHELL San Martin & Aviadores",
+    "supplier": "tigo",
+    "cuenta": "4209912249",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.28649855515624, -57.57129711113728"
+  },
+  {
+    "atm": "SHELL MARIANO R ALONSO",
+    "supplier": "tigo",
+    "cuenta": "4209912300",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.217367898551892, -57.530512969298094"
+  },
+  {
+    "atm": "Supermercado Los Jardines Limpio ",
+    "supplier": "tigo",
+    "cuenta": "4210099645",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.133184405198808, -57.47954745575534"
+  },
+  {
+    "atm": " FORTIS M.R.A       ",
+    "supplier": "tigo",
+    "cuenta": "229722",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.192928238525557, -57.50268785889552"
+  },
+  {
+    "atm": "FORTIS JOCKEY    ",
+    "supplier": "tigo",
+    "cuenta": "229720",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.31375403569629, -57.58418733181383"
+  },
+  {
+    "atm": "Copetrol COLÓN",
+    "supplier": "tigo",
+    "cuenta": "213635",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.280293666373833, -57.64288103063828"
+  },
+  {
+    "atm": "Petrobras AUTOPISTA Luque",
+    "supplier": "tigo",
+    "cuenta": "4210503543",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.252681939650948, -57.51302588257365"
+  },
+  {
+    "atm": "Supermercado Los Jardines Todo Carne",
+    "supplier": "tigo",
+    "cuenta": "4210099618",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.27143851545122, -57.490349118794015"
+  },
+  {
+    "atm": "Los Jardines General Aquino",
+    "supplier": "tigo",
+    "cuenta": "4210829233",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.280967161952457, -57.53444017791507"
+  },
+  {
+    "atm": "Farmatotal Rca. Argentina",
+    "supplier": "tigo",
+    "cuenta": "4210032045",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.319266075641302, -57.59261092682786"
+  },
+  {
+    "atm": "Glory Los Jardines Luque 02",
+    "supplier": "tigo",
+    "cuenta": "4210099522",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.265250227764117, -57.506026624012144"
+  },
+  {
+    "atm": "Copetrol Corrales Luque GSR 50",
+    "supplier": "tigo",
+    "cuenta": "4210829193",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.268301161173724, -57.48526587361126"
+  },
+  {
+    "atm": "Copetrol Mariano",
+    "supplier": "tigo",
+    "cuenta": "4210829280",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.223922719843653, -57.533554659523524"
+  },
+  {
+    "atm": "Copetrol MCAL. LOPEZ",
+    "supplier": "tigo",
+    "cuenta": "217196",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.306866873099448, -57.55354226132649"
+  },
+  {
+    "atm": "Supermercado Gran Vía - Royal Plaza",
+    "supplier": "tigo",
+    "cuenta": "210588",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.308257001817427, -57.552586382770485"
+  },
+  {
+    "atm": "SHELL  SURUBIÍ MRA",
+    "supplier": "tigo",
+    "cuenta": "211873",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.192057373475276, -57.5058678588955"
+  },
+  {
+    "atm": "Shell Bahia Aviadores del Chaco GSR",
+    "supplier": "tigo",
+    "cuenta": "4210829217",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.282581821195716, -57.562531264733735"
+  },
+  {
+    "atm": "Petrobras El Portal Loma Pyta GSR",
+    "supplier": "tigo",
+    "cuenta": "208908",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "fiber",
+    "coords": "-25.239449220105175, -57.54225619016244"
+  },
+  {
+    "atm": " Supermercado Los Jardines Fernando GLORY",
+    "supplier": "tigo",
+    "cuenta": "4210014107",
+    "contrato": "Contrato",
+    "date": "",
+    "connectionType": "hfc",
+    "coords": "-25.31264037081769, -57.54212887314473"
+  }
+]
